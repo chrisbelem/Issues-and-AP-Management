@@ -34,7 +34,7 @@
         }
         .chart-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             width: 100%;
         }
@@ -76,7 +76,7 @@
 <body>
 
 <div class="container-fluid my-4">
-    <h1 class="mb-4 text-center font-weight-bold">Project Issues & Action Plans</h1>
+    <h1 class="mb-4 text-center font-weight-bold">Projac Issues & Action Plans</h1>
     <!-- Tab Navigation -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
@@ -115,8 +115,8 @@
             </div>
             <div class="filters-container">
                 <div class="form-group">
-                    <label for="reporterFilter"><strong>Filter by Issue Reporter:</strong></label>
-                    <select class="form-control" id="reporterFilter">
+                    <label for="actionOwnerFilterIssues"><strong>Filter by Action Owner:</strong></label>
+                    <select class="form-control" id="actionOwnerFilterIssues">
                         <option value="">Show All</option>
                     </select>
                 </div>
@@ -147,8 +147,8 @@
             </div>
             <div class="filters-container">
                 <div class="form-group">
-                    <label for="assigneeFilter"><strong>Filter by AP Assignee:</strong></label>
-                    <select class="form-control" id="assigneeFilter">
+                    <label for="actionOwnerFilterAps"><strong>Filter by Action Owner:</strong></label>
+                    <select class="form-control" id="actionOwnerFilterAps">
                          <option value="">Show All</option>
                     </select>
                 </div>
@@ -181,6 +181,12 @@
 <script>
     // Embedded CSV Data
     const issuesCsv = `code,projac_link,key,status,summary,countries,reporter_name,squad_reporter,created_at,updated_at,due_date_at,completed_at,responsible_email,accountable_email,process_journey_macroprocess__name,overall_risk_rating,origin,subcategory,residual_risk_level,responsible_name,accountable_name,business_units,Action,Action Owner
+I009595,https://backoffice.ist.nubank.world/projac/#/im/issues/I009595,,On Track,"Missing periodicity and governance for Access Report and RoPA",,Ingrid Sgulmar,,2025-06-02 16:09:22,2025-07-03 13:19:24,2026-01-31,,ingrid.sgulmar@nubank.com.br,jessica.paul@nubank.com.br,Lending,Low,Self-Identified,"Risk and Control Self Assessments (RCSAs)",Low,Ingrid Sgulmar,Jessica Paul,,No Actions,-
+I008101,https://backoffice.ist.nubank.world/projac/#/im/issues/I008101,PCAPG-7652,Late,"Accounting Treatment",,Nicolas Cardeira,Controllership,2025-01-06 14:41:51,2025-06-07 06:08:19,,,juan.rangel@nubank.com.br,mat.lima@nubank.com.br,,Low,Defense Assessment,"NP&F+ Assessments",Medium,Juan Rangel,Matheus Lima,,Create Action Plan,Juan Rangel
+I010372,https://backoffice.ist.nubank.world/projac/#/im/issues/I010372,,Late,"There is not a process to update the BIA for the Lending area",,Camila Passos,Lending Ops,2025-07-11 19:42:25,2025-08-01 06:08:08,,,camila.passos@nubank.com.br,jessica.paul@nubank.com.br,,Medium,Defense Assessment,"NP&F+ Assessments",Medium,Camila Passos,Jessica Paul,,Create Action Plan,Camila Passos
+I010766,https://backoffice.ist.nubank.world/projac/#/im/issues/I010766,,Late,"Communication review",,Erica Lanes,Legal,2025-08-01 21:55:18,2025-09-01 06:08:07,,,fernanda.patrao@nubank.com.br,jessica.paul@nubank.com.br,,Low,Defense Assessment,"NP&F+ Assessments",Medium,Fernanda Patrao,Jessica Paul,,Create Action Plan,Fernanda Patrao
+I011005,https://backoffice.ist.nubank.world/projac/#/im/issues/I011005,,TBD,"Amendment to the Adhesion Contract",,Dominique Lara,Legal Mexico,2025-08-20 20:13:38,,,,lourdes.perez@nubank.com.br,emilio.gonzalez@nubank.com.br,,Medium,Defense Assessment,"NP&F+ Assessments",Medium,Lourdes Pérez,Emilio Gonzalez,,No Actions,-
+I008942,https://backoffice.ist.nubank.world/projac/#/im/issues/I008942,,On Track,"Failure in the reconciliation of payroll payments",,Tiago Yamanaka,Risk Platforms,2025-04-01 17:09:15,2025-07-03 13:19:24,2025-09-30,,tiago.yamanaka@nubank.com.br,jessica.paul@nubank.com.br,Lending,Medium,Self-Identified,"Risk and Control Self Assessments (RCSAs)",Medium,Tiago Yamanaka,Jessica Paul,,No Actions,-
 I009595,https://backoffice.ist.nubank.world/projac/#/im/issues/I009595,,On Track,"Missing periodicity and governance for Access Report and RoPA",,Ingrid Sgulmar,,2025-06-02 16:09:22,2025-07-03 13:19:24,2026-01-31,,ingrid.sgulmar@nubank.com.br,jessica.paul@nubank.com.br,Lending,Low,Self-Identified,"Risk and Control Self Assessments (RCSAs)",Low,Ingrid Sgulmar,Jessica Paul,,No Actions,-
 I008101,https://backoffice.ist.nubank.world/projac/#/im/issues/I008101,PCAPG-7652,Late,"Accounting Treatment",,Nicolas Cardeira,Controllership,2025-01-06 14:41:51,2025-06-07 06:08:19,,,juan.rangel@nubank.com.br,mat.lima@nubank.com.br,,Low,Defense Assessment,"NP&F+ Assessments",Medium,Juan Rangel,Matheus Lima,,Create Action Plan,Juan Rangel
 I010766,https://backoffice.ist.nubank.world/projac/#/im/issues/I010766,,Late,"Communication review",,Erica Lanes,Legal,2025-08-01 21:55:18,2025-09-01 06:08:07,,,fernanda.patrao@nubank.com.br,jessica.paul@nubank.com.br,,Low,Defense Assessment,"NP&F+ Assessments",Medium,Fernanda Patrao,Jessica Paul,,Create Action Plan,Fernanda Patrao
@@ -348,6 +354,12 @@ C002121,https://backoffice.ist.nubank.world/projac/#/im/issues/C002121,PCAPG-678
 I011069,https://backoffice.ist.nubank.world/projac/#/im/issues/I011069,,TBD,[AML] Not having a limit/cap for requested microloans in a month could incentivize suspicious transactions allegedly related to money laundering,"[""Mexico""]",Yared Vazquez,MX AML,2025-08-22 20:45:39,,,,lourdes.perez@nubank.com.br,emilio.gonzalez@nubank.com.br,,Medium,Defense Assessment,NP&F+ Assessments,Medium,Lourdes Pérez,Emilio Gonzalez,"[""Global Lending""]",No Actions,-`;
 
     const apsCsv = `ap_code,ap_link_projac,ap_status,ap_countries,issue_link_projac,issue_status,issue_summary,issue_due_date_at,issue_subcategory,ap_summary,ap_created_at,ap_due_date_at,ap_business_unit,ap_assignee_name,Action,Action Owner
+AP006362,https://backoffice.ist.nubank.world/projac/#/im/issues/C006152/action-plan/AP006362,Late,,https://backoffice.ist.nubank.world/projac/#/im/issues/C006152,Late,"Finding #1 - Failures in controls related to the timely and accurate issuance of account statements",2025-01-31,Fieldworks Assessments,"Action Plan #1.1 - Review the issuance control with the inclusion of all eligible customers",2024-06-12 00:00:00,2025-01-31,Global Lending,Renato Marques,Complete/Replan AP,Paola Malherbe
+AP010721,https://backoffice.ist.nubank.world/projac/#/im/issues/I009096/action-plan/AP010721,On Track,,https://backoffice.ist.nubank.world/projac/#/im/issues/I009096,On Track,"Risks associated with electronically contracting PRIVATE payroll-deductible loans with elderly individuals for municipalities with Legal restrictions",2025-12-10,"Other control testing and monitoring activities (i.e. Controlinhos)","Replicate public payroll loan solution for private companies",2025-05-13 14:14:16,2025-12-10,Global Lending,Gabriel Othero,No Actions,-
+AP012229,https://backoffice.ist.nubank.world/projac/#/im/issues/I009096/action-plan/AP012229,Pending Validation (late),,https://backoffice.ist.nubank.world/projac/#/im/issues/I009096,On Track,"Risks associated with electronically contracting PRIVATE payroll-deductible loans with elderly individuals for municipalities with Legal restrictions",2025-12-10,"Other control testing and monitoring activities (i.e. Controlinhos)","Deprecate Datasets with Delayed Landing Times",2025-06-17 16:57:23,2025-11-30,Global Lending,Maria Silva,No Actions,-
+AP012430,https://backoffice.ist.nubank.world/projac/#/im/issues/I009637/action-plan/AP012430,On Track,,https://backoffice.ist.nubank.world/projac/#/im/issues/I009637,Late,"Elevated Cash-Out Fraud Risks via Digital Payment Channels (Medium)",2025-11-30,"NP&F+ Assessments","Amplitude events",2025-07-14 15:12:19,2025-11-30,Global Lending,Joao Pereira,No Actions,-
+AP011222,https://backoffice.ist.nubank.world/projac/#/im/issues/I009637/action-plan/AP011222,Pending Approval (late),,https://backoffice.ist.nubank.world/projac/#/im/issues/I009637,Late,"Elevated Cash-Out Fraud Risks via Digital Payment Channels (Medium)",2025-11-30,"NP&F+ Assessments","Monitor fraud incidents, and reassess based if thresholds are surpassed",2025-06-06 16:37:28,2025-11-30,Global Lending,Ana Costa,No Actions,-
+AP011329,https://backoffice.ist.nubank.world/projac/#/im/issues/I009637/action-plan/AP011329,Late,,https://backoffice.ist.nubank.world/projac/#/im/issues/I009637,Late,"Elevated Cash-Out Fraud Risks via Digital Payment Channels (Medium)",2025-11-30,"NP&F+ Assessments","Define and implement rules to block suspicious transactions",2025-06-06 16:38:29,2025-11-30,Global Lending,Lucas Mendes,No Actions,-
 AAP006362,https://backoffice.ist.nubank.world/projac/#/im/issues/C006152/action-plan/AP006362,Late,,https://backoffice.ist.nubank.world/projac/#/im/issues/C006152,Late,"Finding #1 - Failures in controls related to the timely and accurate issuance of account statements",2025-01-31,Fieldworks Assessments,"Action Plan #1.1 - Review the issuance control with the inclusion of all eligible customers",2024-06-12 00:00:00,2025-01-31,Global Lending,Renato Marques,Complete/Replan AP,Paola Malherbe
 AP010721,https://backoffice.ist.nubank.world/projac/#/im/issues/I009096/action-plan/AP010721,On Track,,https://backoffice.ist.nubank.world/projac/#/im/issues/I009096,On Track,"Risks associated with electronically contracting PRIVATE payroll-deductible loans with elderly individuals for municipalities with Legal restrictions",2025-12-10,"Other control testing and monitoring activities (i.e. Controlinhos)","Replicate public payroll loan solution for private companies",2025-05-13 14:14:16,2025-12-10,Global Lending,Gabriel Othero,No Actions,-
 AP012430,https://backoffice.ist.nubank.world/projac/#/im/issues/I009637/action-plan/AP012430,On Track,,https://backoffice.ist.nubank.world/projac/#/im/issues/I009637,Late,"Elevated Cash-Out Fraud Risks via Digital Payment Channels (Medium)",2025-11-30,"NP&F+ Assessments","Amplitude events",2025-07-14 15:12:19,2025-11-30,Global Lending,Joao Pereira,No Actions,-
@@ -386,7 +398,7 @@ AP011257,https://backoffice.ist.nubank.world/projac/#/im/issues/I009597/action-p
 AP012956,https://backoffice.ist.nubank.world/projac/#/im/issues/I010756/action-plan/AP012956,Late,"[""Mexico""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I010756,Late,[MX IT Risk] Possibility of inadequate functionality due to lack of user acceptance testing,2025-08-17,NP&F+ Assessments,Provide an user acceptance testing,2025-08-01 17:31:29,2025-08-17,Global Lending,"[""Lourdes Pérez""]",Complete/Replan AP,Paola Malherbe
 AP013812,https://backoffice.ist.nubank.world/projac/#/im/issues/I010841/action-plan/AP013812,Pending Approval,"[""Mexico""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I010841,On Track,Tax || Transfer Pricing,,NP&F+ Assessments,Tax template filled,2025-09-11 17:15:56,2025-10-16,Global Lending,"[""Aline Moreira""]",Complete AP Pending Approval,Pablo Campos
 AP011229,https://backoffice.ist.nubank.world/projac/#/im/issues/I009633/action-plan/AP011229,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009633,On Track,Elevated Fraud Exposure and Customer Experience Deficiencies from Expanded Credit Product Features,2025-12-31,NP&F+ Assessments,Ensure integration with Automatos is working for Overdraft,2025-06-06 17:04:37,2025-11-30,Global Lending,"[""Alice Sabino""]",No Actions,-
-AP009216,https://backoffice.ist.nubank.world/projac/#/im/issues/I008327/action-plan/AP009216,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I008327,On Track,[Reg Compliance] Lack of clarity about the need to pay interests in the first few months ,2025-09-30,NP&F+ Assessments,Clarity about interest paying while in grace period,2025-02-04 19:23:02,2025-09-30,Global Lending,"[""Camila Olivieri""]",#REF!,#REF!
+AP009216,https://backoffice.ist.nubank.world/projac/#/im/issues/I008327/action-plan/AP009216,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I008327,On Track,[Reg Compliance] Lack of clarity about the need to pay interests in the first few months ,2025-09-30,NP&F+ Assessments,Clarity about interest paying while in grace period,2025-02-04 19:23:02,2025-09-30,Global Lending,"[""Camila Olivieri""]",No Actions,-
 AP010364,https://backoffice.ist.nubank.world/projac/#/im/issues/I008942/action-plan/AP010364,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I008942,On Track,Failure in the reconciliation of payroll payments,2025-10-31,NP&F+ Assessments,"Include controls in the 3 data that will be received - Structuring Data, Receipt of values by Caixa, and Receipt of the transfer of values by Caixa",2025-04-21 19:43:13,2025-10-31,Global Lending,"[""Maria Costa"",""Breno Barreto""]",No Actions,-
 AP011218,https://backoffice.ist.nubank.world/projac/#/im/issues/I009634/action-plan/AP011218,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009634,On Track,Credit Risk alignments,2025-10-31,NP&F+ Assessments,Daily view of the total and available limit for each customer,2025-06-06 14:49:48,2025-10-31,Global Lending,"[""Alice Sabino""]",No Actions,-
 AP013432,https://backoffice.ist.nubank.world/projac/#/im/issues/I010739/action-plan/AP013432,Pending Approval (late),"[""Mexico""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I010739,On Track,[MX IT Risk] Possibility of inadequate functionality due to insufficient pre-production technical testing,,NP&F+ Assessments,Results of the pre-launch testing,2025-08-26 19:15:43,2025-10-17,Global Lending,"[""Aline Moreira""]",Complete AP Pending Approval,Mónica Martínez
@@ -396,7 +408,7 @@ AP010615,https://backoffice.ist.nubank.world/projac/#/im/issues/I009212/action-p
 AP011058,https://backoffice.ist.nubank.world/projac/#/im/issues/I009282/action-plan/AP011058,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009282,On Track,BDRO Reconciliation Break Lending - 2021-Q4,2025-12-01,"Other defense assessments, reviews, or effective challenge",Investigation being conducted by Unsecured Lending team,2025-05-26 14:31:42,2025-12-01,Global Lending,"[""Alecsander Yamana""]",No Actions,-
 AP011067,https://backoffice.ist.nubank.world/projac/#/im/issues/I009281/action-plan/AP011067,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009281,On Track,BDRO Reconciliation Break Lending - 2020-Q1,2025-12-01,"Other defense assessments, reviews, or effective challenge",Investigation being conducted by Unsecured Lending team,2025-05-26 20:08:47,2025-12-01,Global Lending,"[""Alecsander Yamana"",""Dimitri Lameri""]",No Actions,-
 AP011108,https://backoffice.ist.nubank.world/projac/#/im/issues/I008511/action-plan/AP011108,Late,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I008511,Late,[Reg Compliance] Withholding Pix payments unrelated to the invoice,2025-06-06,NP&F+ Assessments,Definition of the user experience with PJ Invoice pre-payment product,2025-05-29 18:17:52,2025-06-06,Global Lending,"[""Lais Takahashi"",""Larissa Souza""]",Complete AP Pending Approval,Daniel Lotufo
-AP011219,https://backoffice.ist.nubank.world/projac/#/im/issues/I009632/action-plan/AP011219,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009632,On Track,Getting approval in KYB,2025-11-30,NP&F+ Assessments,Submit to KYB,2025-06-06 14:50:47,2025-11-30,Global Lending,"[""Murilo Abreu""]",#REF!,#REF!
+AP011219,https://backoffice.ist.nubank.world/projac/#/im/issues/I009632/action-plan/AP011219,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009632,On Track,Getting approval in KYB,2025-11-30,NP&F+ Assessments,Submit to KYB,2025-06-06 14:50:47,2025-11-30,Global Lending,"[""Murilo Abreu""]",No Actions,-
 AP011330,https://backoffice.ist.nubank.world/projac/#/im/issues/I009729/action-plan/AP011330,Pending Approval (late),"[""Colombia""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009729,On Track,System Vulnerability,,NP&F+ Assessments,Request Security Architecture review,2025-06-16 16:47:20,2025-08-22,Global Lending,"[""Bryan Rodriguez""]",Complete AP Pending Approval,Camilo Aranda
 AP012341,https://backoffice.ist.nubank.world/projac/#/im/issues/I009633/action-plan/AP012341,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009633,On Track,Elevated Fraud Exposure and Customer Experience Deficiencies from Expanded Credit Product Features,2025-12-31,NP&F+ Assessments,Ensure Marte integration with Simple Account Authorizer,2025-07-08 14:07:36,2025-12-31,Global Lending,"[""Alice Sabino""]",No Actions,-
 AP012940,https://backoffice.ist.nubank.world/projac/#/im/issues/I008174/action-plan/AP012940,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I008174,On Track,Improper allocation of operating losses,2025-11-10,"Other defense assessments, reviews, or effective challenge",Risk Acceptance for Operational Losses,2025-07-31 18:53:20,2025-11-10,Global Lending,"[""Ingrid Sgulmar""]",No Actions,-
@@ -443,7 +455,7 @@ AP009193,https://backoffice.ist.nubank.world/projac/#/im/issues/I008315/action-p
 AP010750,https://backoffice.ist.nubank.world/projac/#/im/issues/I008946/action-plan/AP010750,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I008946,On Track,Portability Risks for Nubank,2026-02-28,NP&F+ Assessments,"Deep dive in Product Private Payroll flow, business rules and potential risks",2025-05-07 21:05:07,2026-02-28,Global Lending,"[""Natalia Isepi"",""Gabriella Bidurin""]",No Actions,-
 AP013679,https://backoffice.ist.nubank.world/projac/#/im/issues/I011162/action-plan/AP013679,Pending Approval,"[""Mexico""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I011162,On Track, [Op Risk] NP&F launch approval,,NP&F+ Assessments,Launch approval,2025-09-05 01:08:45,2025-11-30,Global Lending,"[""Lourdes Pérez""]",Complete AP Pending Approval,Gabriela Osorio
 AP010855,https://backoffice.ist.nubank.world/projac/#/im/issues/I009291/action-plan/AP010855,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009291,On Track,Risk of non-compliance with rules from the Autorregulação,2026-01-13,NP&F+ Assessments,Repositório de Evidências CTC - Portabilidade ,2025-05-13 15:15:32,2026-01-13,Global Lending,"[""Fernando Pieracciani"",""Bruno Evaldt""]",No Actions,-
-AP013456,https://backoffice.ist.nubank.world/projac/#/im/issues/I009591/action-plan/AP013456,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009591,On Track,"[Fraud] Risk of MEDs being opened to the institutional Lending account, and not being redirected to the Beneficiary Customer",2025-12-31,NP&F+ Assessments,Alins the solution with Fraud team,2025-08-27 18:55:38,2025-12-31,Global Lending,"[""Lais Takahashi""]",#REF!,#REF!
+AP013456,https://backoffice.ist.nubank.world/projac/#/im/issues/I009591/action-plan/AP013456,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009591,On Track,"[Fraud] Risk of MEDs being opened to the institutional Lending account, and not being redirected to the Beneficiary Customer",2025-12-31,NP&F+ Assessments,Alins the solution with Fraud team,2025-08-27 18:55:38,2025-12-31,Global Lending,"[""Lais Takahashi""]",No Actions,-
 AP009335,https://backoffice.ist.nubank.world/projac/#/im/issues/I008174/action-plan/AP009335,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I008174,On Track,Improper allocation of operating losses,2025-11-10,"Other defense assessments, reviews, or effective challenge",Reallocation of operational losses,2025-02-12 18:46:14,2025-11-10,Global Lending,"[""Ingrid Sgulmar""]",No Actions,-
 AP011256,https://backoffice.ist.nubank.world/projac/#/im/issues/I009598/action-plan/AP011256,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009598,On Track,Discrepancy Between GFR Received Amount and Amount Owed,2025-12-31,NP&F+ Assessments,"Create a flow where we can match the loan id with the payment id, to avoid any remaining amount in the GFS",2025-06-09 14:44:07,2025-12-31,Global Lending,"[""Lais Takahashi""]",No Actions,-
 AP011292,https://backoffice.ist.nubank.world/projac/#/im/issues/I009639/action-plan/AP011292,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009639,On Track,Elevated Debit/Credit Card Fraud and Exploitation from Expanded Credit Access,2026-03-30,NP&F+ Assessments,"Monitor chargeback requests that occur after a customer has consumed their Overdraft limit . The implementation details, thresholds, and data sharing frequency for this monitoring should be defined in collaboration with the fraud team . (PoC: Jessica Deso",2025-06-12 12:50:09,2026-01-31,Global Lending,"[""Alice Sabino""]",No Actions,-
@@ -477,7 +489,7 @@ AP009727,https://backoffice.ist.nubank.world/projac/#/im/issues/I008237/action-p
 AP011264,https://backoffice.ist.nubank.world/projac/#/im/issues/I009635/action-plan/AP011264,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009635,On Track,Comprehensive Capital Management and Regulatory Alignment,2025-10-31,NP&F+ Assessments,Presentation to Bacen,2025-06-09 17:27:50,2025-10-31,Global Lending,"[""Alice Sabino""]",No Actions,-
 AP011116,https://backoffice.ist.nubank.world/projac/#/im/issues/I008835/action-plan/AP011116,Pending Validation (late),"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I008835,Late,"[Fraud] Risk that integrations with fraud services may be compromised due to the platform change, which could affect the effectiveness of certain defenses against various types of fraud.",2025-08-31,NP&F+ Assessments,Migration will not affect Capo endpoints,2025-05-29 20:13:24,2025-08-31,Global Lending,"[""Aline Moreira""]",Complete AP Pending Validation,Ananda Teixeira
 AP011289,https://backoffice.ist.nubank.world/projac/#/im/issues/I009637/action-plan/AP011289,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009637,Late,Elevated Cash-Out Fraud Risks via Digital Payment Channels (Medium),2025-11-30,NP&F+ Assessments,"Ensure the ""Delay Suspicious Transfers After Lending"" rule is not applied to the transaction itself, as the lending occurs concurrently with the transfer and applying the rule would create a poor user experience . A discovery is required here . (PoC: Ande",2025-06-12 12:47:03,2025-11-30,Global Lending,"[""Alice Sabino""]",No Actions,-
-AP011290,https://backoffice.ist.nubank.world/projac/#/im/issues/I009635/action-plan/AP011290,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009635,On Track,Comprehensive Capital Management and Regulatory Alignment,2025-10-31,NP&F+ Assessments,Engage the ALM team to assess the impact on in-transit balance and the capital/accounting treatment of limits granted to customers .,2025-06-12 12:48:06,2025-09-30,Global Lending,"[""Alice Sabino""]",#REF!,#REF!
+AP011290,https://backoffice.ist.nubank.world/projac/#/im/issues/I009635/action-plan/AP011290,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009635,On Track,Comprehensive Capital Management and Regulatory Alignment,2025-10-31,NP&F+ Assessments,Engage the ALM team to assess the impact on in-transit balance and the capital/accounting treatment of limits granted to customers .,2025-06-12 12:48:06,2025-09-30,Global Lending,"[""Alice Sabino""]",No Actions,-
 AP012653,https://backoffice.ist.nubank.world/projac/#/im/issues/I010306/action-plan/AP012653,On Track,"[""Colombia""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I010306,On Track,Lending Issuance rule for SAL,2025-09-17,NP&F+ Assessments,Clarity on Amount Lent ,2025-07-22 19:59:46,2025-09-17,Global Lending,"[""Bryan Rodriguez""]",No Actions,-
 AP010618,https://backoffice.ist.nubank.world/projac/#/im/issues/I009213/action-plan/AP010618,On Track,"[""Mexico""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009213,On Track,Issue #2 - Non-compliance with underwriting policies for minimum eligibility criteria (age hardcuts) ,2025-10-15,Fieldworks Assessments,2.1 Implement age validation controls in the underwriting process.,2025-04-29 00:00:00,2025-10-15,Global Lending,"[""Mariana Sanches""]",No Actions,-
 AP010997,https://backoffice.ist.nubank.world/projac/#/im/issues/I009196/action-plan/AP010997,On Track,"[""Brazil""]",https://backoffice.ist.nubank.world/projac/#/im/issues/I009196,On Track,System Crash- High Severity,2025-10-31,Risk and Control Self Assessments (RCSAs),Monitoring / Observability,2025-05-22 20:25:07,2025-10-31,Global Lending,"[""Emanuela Amorim""]",No Actions,-
@@ -497,10 +509,10 @@ AP013739,https://backoffice.ist.nubank.world/projac/#/im/issues/I011102/action-p
 
         // --- Issues Tab ---
         populateTable(issuesData, 'issuesTable', 'code', 'projac_link', issuesHiddenColumns);
-        populateFilter(issuesData, 'reporterFilter', 'reporter_name');
+        populateFilter(issuesData, 'actionOwnerFilterIssues', 'Action Owner');
         populateFilter(issuesData, 'issueStatusFilter', 'status');
         const issueFilters = [
-            { id: 'reporterFilter', colIndex: 3 },
+            { id: 'actionOwnerFilterIssues', colIndex: 11 },
             { id: 'issueStatusFilter', colIndex: 1 }
         ];
         issueFilters.forEach(filter => {
@@ -510,10 +522,10 @@ AP013739,https://backoffice.ist.nubank.world/projac/#/im/issues/I011102/action-p
 
         // --- APs Tab ---
         populateTable(apsData, 'apsTable', 'ap_code', 'ap_link_projac', apsHiddenColumns);
-        populateFilter(apsData, 'assigneeFilter', 'ap_assignee_name');
+        populateFilter(apsData, 'actionOwnerFilterAps', 'Action Owner');
         populateFilter(apsData, 'apStatusFilter', 'ap_status');
         const apFilters = [
-            { id: 'assigneeFilter', colIndex: 4 },
+            { id: 'actionOwnerFilterAps', colIndex: 6 },
             { id: 'apStatusFilter', colIndex: 1 }
         ];
         apFilters.forEach(filter => {
@@ -551,9 +563,10 @@ AP013739,https://backoffice.ist.nubank.world/projac/#/im/issues/I011102/action-p
     function createDashboard(issuesData, apsData) {
         const donutLayout = {
             hole: 0.4,
-            margin: { t: 40, b: 80, l: 40, r: 40 },
-            legend: { x: 0.5, y: -0.2, xanchor: 'center', orientation: 'h' },
-            font: { family: 'Poppins, sans-serif' }
+            margin: { t: 50, b: 50, l: 50, r: 50 },
+            legend: { "orientation": "v" },
+            font: { family: 'Poppins, sans-serif' },
+            autosize: true
         };
 
         // Chart 1: Late Issues by Risk Rating
